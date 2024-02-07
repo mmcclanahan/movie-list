@@ -1,10 +1,10 @@
-import MovieListEntry from 'client/src/components/MovieListEntry.jsx';
+import MovieListEntry from './MovieListEntry.jsx';
+import React from 'react';
 const MovieListView = (props) => {
-
   return (
-    props.videos.forEach((video) => {
-      <MovieListEntry video={video}/>
-    });
+    <div className='MovieList'>
+    {props.videos.map((video) => (<MovieListEntry video={video} />))}
+    </div>
   )
 }
 
