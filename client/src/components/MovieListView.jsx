@@ -1,9 +1,11 @@
 import MovieListEntry from './MovieListEntry.jsx';
 import React from 'react';
 const MovieListView = (props) => {
+
+  let filteredArray = props.videos.filter((video) => (video.watched === props.watchedMovies));
   return (
     <div className='MovieList'>
-    {props.videos.map((video) => (<MovieListEntry video={video} />))}
+    {filteredArray.map((video) => (<MovieListEntry video={video} toggleWatched={props.toggleWatched}/>))}
     </div>
   )
 }

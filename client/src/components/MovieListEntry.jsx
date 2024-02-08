@@ -1,9 +1,14 @@
 import React from 'react';
 const MovieListEntry = (props) => {
-  console.log(props.video)
+
+  let id = props.video.watched === true ? 'watched' : 'toWatch';
+//want button onclick to toggle props.video.watched
+  let videoObject = props.video;
+
   return (
-    <div>
-      {props.video.title}
+    <div className='videoTitleAndButton'>
+      <div className='videoTitle'>{props.video.title}</div>
+      <button className={id} onClick={(e)=>{props.toggleWatched(videoObject)}}>Watched</button>
     </div>
   );
 }

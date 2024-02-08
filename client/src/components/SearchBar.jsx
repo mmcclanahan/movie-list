@@ -3,8 +3,9 @@ const SearchBar = (props) => {
 
   return (
     <div>
-        <input name='title' type='text' placeholder='Search...' />
-        <button onClick={props.handleSearch}>Go!</button>
+        <input className='searchMovieInput' name='title' type='text' placeholder='Search...' />
+        <button onClick={props.handleSearch}>Search</button>
+        <button onClick={props.showAllMovies}>ShowAllMovies</button>
     </div>
   )
 }
