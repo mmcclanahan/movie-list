@@ -13,8 +13,6 @@ const App = () => {
   //state of which movies are shown watched or to watch
   const [watchedMovies, setWatchedMovies] = React.useState(false);
 
-
-
   const handleSearch = () => {
     let searchValue = document.getElementsByClassName('searchMovieInput')[0].value;
     if (searchValue === '') {
@@ -45,6 +43,7 @@ const App = () => {
     setMovieList(movies);
     document.getElementsByClassName('addMovieInput')[0].value = '';
   };
+
   const toggleWatched = (videoObject) => {
     if (videoObject.watched === true) {
       videoObject.watched = false;

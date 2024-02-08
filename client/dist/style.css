@@ -3,9 +3,12 @@ body {
 }
 .watched {
   background-color: green;
+  margin-right: 20px;
+  width: 100px;
 }
 .toWatch {
   background: grey;
+  width: 100px
 }
 .allElements {
   display: flex;
@@ -21,14 +24,32 @@ body {
   margin-bottom: 20px;
 }
 .videoTitleAndButton {
+  display: flex;
+  justify-content:space-around;
   background-color: wheat;
     border-style: solid;
     border-color: black;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 
 }
+.MovieList {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 25px;
+  background-color: antiquewhite;
+}
+
 .buttonsAndSearch {
   display: flex;
   justify-content: space-evenly;
+}
+.watchedButtons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 20px;
+}
+.addMovieInput {
+  margin-left: 100px;
+  margin-bottom: 10px
 }
