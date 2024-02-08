@@ -5,7 +5,7 @@ const SearchBar = (props) => {
     <div>
         <input className='searchMovieInput' name='title' type='text' placeholder='Search...' />
         <button onClick={props.handleSearch}>Search</button>
-        <button onClick={props.showAllMovies}>ShowAllMovies</button>
+        <button onClick={props.showAllMovies}>Back</button>
     </div>
   )
 }
