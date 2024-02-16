@@ -1,0 +1,1 @@
+//querys functions for select and insert
