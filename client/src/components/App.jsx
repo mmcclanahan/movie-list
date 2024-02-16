@@ -6,7 +6,7 @@ import WatchedButton from './WatchedButton.jsx'
 import ToWatchButton from './ToWatchButton.jsx'
 
 const App = () => {
-  //movies being shown
+  //movies to be shown
   const [movieList, setMovieList] = React.useState([]);
   //holds all movies added
   const [allMovies, setAllMovies] = React.useState([]);
@@ -18,7 +18,7 @@ const App = () => {
     if (searchValue === '') {
       setMovieList(allMovies);
     } else {
-      let arrayOfMovies = movieList.filter((movie) => {
+      let arrayOfMovies = allMovies.filter((movie) => {
         return (movie.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1)
       })
       if(arrayOfMovies.length === 0) {
@@ -26,52 +26,56 @@ const App = () => {
       } else {
         setMovieList(arrayOfMovies);
       }
-      document.getElementsByClassName('searchMovieInput')[0].value = '';
+
     }
   };
-
+//checked
   const showAllMovies = () => {
     let movies = allMovies;
     setMovieList(movies);
+    document.getElementsByClassName('searchMovieInput')[0].value = '';
   }
-
+//checked
   const addMovie = () => {
-    let movieName = document.getElementsByClassName('addMovieInput')[0].value;
-    let newMovieName = {'title': movieName, 'watched': false};
+    let userInput = document.getElementsByClassName('addMovieInput')[0].value;
+    let newMovieName = {'title': userInput, 'watched': false};
     let movies = allMovies.slice().concat(newMovieName);
     setAllMovies(movies);
     setMovieList(movies);
     document.getElementsByClassName('addMovieInput')[0].value = '';
   };
-
+//checked
+  const addMovieOnEnterPress = (event) => {
+    if (event.key === 'Enter') {
+      addMovie();
+    }
+  }
+//checked  undooooo
   const toggleWatched = (videoObject) => {
+    allMovies.indexOf(videoObject)
     if (videoObject.watched === true) {
       videoObject.watched = false;
     } else {
       videoObject.watched = true;
     }
   };
-//
+//d
   return (
     <div className='allElements'>
       <div className='header'>
         <h1>Movie List</h1>
       </div>
-      <div>
-        <AddMovie addMovie={addMovie}/>
-      </div>
+        <AddMovie addMovieOnEnterPress={addMovieOnEnterPress} addMovie={addMovie}/>
       <div className='buttonsAndSearch'>
         <div className='watchedButtons'>
-            <WatchedButton setWatchedMovies={() => setWatchedMovies(true)}/>
-            <ToWatchButton setWatchedMovies={() => setWatchedMovies(false)}/>
+            <WatchedButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(true)}/>
+            <ToWatchButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(false)}/>
         </div>
         <div>
           <SearchBar handleSearch={handleSearch} showAllMovies={showAllMovies}/>
         </div>
       </div>
-      <div>
         <MovieListView videos={movieList} watchedMovies={watchedMovies} toggleWatched={toggleWatched}/>
-      </div>
     </div>
   );
 }

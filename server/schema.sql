@@ -11,3 +11,4 @@ INSERT INTO movies(name, watched) VALUES
 ('Fight Club', 0),
 ('The Godfather', 0);
 /*create the database and tables
+maybe add unique key (name) to stop dublicates

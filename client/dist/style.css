@@ -1,19 +1,33 @@
+
 body {
+  background-color: blanchedalmond;
   font-family: sans-serif, arial;
+
 }
 .watched {
   background-color: green;
-  margin-right: 20px;
   width: 100px;
 }
 .toWatch {
   background: grey;
-  width: 100px
+  width: 100px;
 }
-.allElements {
-  display: flex;
-  flex-direction: column;
+#toggleWatched {
+
 }
+#toggleToWatch {
+
+}
+.addMovieInputAndButton {
+display: grid;
+grid-template-columns: 1.5fr .5fr 2fr 2fr;
+column-gap: 10px;
+
+}
+.addMovieInput {
+
+}
+
 .header {
   display: flex;
   justify-content: center;
@@ -24,19 +38,27 @@ body {
   margin-bottom: 20px;
 }
 .videoTitleAndButton {
-  display: flex;
-  justify-content:space-around;
+  display: grid;
+  grid-template-columns: 400px 400px;
+  justify-content: center;
+  align-items: center;
   background-color: wheat;
-    border-style: solid;
-    border-color: black;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  border-style: solid;
+  border-color: black;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
 
 }
 .MovieList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 5px;
   margin-left: 100px;
   margin-right: 100px;
   margin-top: 25px;
+  margin-bottom: 50px;
   background-color: antiquewhite;
 }
 
@@ -45,11 +67,7 @@ body {
   justify-content: space-evenly;
 }
 .watchedButtons {
-  display: flex;
-  justify-content: space-evenly;
-  margin-right: 20px;
-}
-.addMovieInput {
-  margin-left: 100px;
-  margin-bottom: 10px
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
 }

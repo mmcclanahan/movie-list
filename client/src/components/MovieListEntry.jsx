@@ -12,7 +12,7 @@ const MovieListEntry = (props) => {
   return (
     <div className='videoTitleAndButton'>
       <div className='videoTitle'>{props.video.title}</div>
-      <button className={id} onClick={(e)=>{props.toggleWatched(videoObject); toggleButtonColor()}}>{watched ? 'Watched' : 'To Watch'}</button>
+      <button className={id} onClick={(e)=>{props.toggleWatched(videoObject); toggleButtonColor()}}>{watched ? 'Watched' : 'Watch'}</button>
     </div>
   );
 }
