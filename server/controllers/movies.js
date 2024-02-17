@@ -17,16 +17,26 @@ module.exports = {
     });
   }, //uses insert from models takes in a name parameter and callback
   postAMovie: function(req, res) {
-    console.log('controllerpost', req.body)
-    models.insert(req.body.name, (err, results) => {
+    console.log('controllerpost', req.body);
+    console.log('req.body.name', req.body.title);
+    models.insert(req.body.title, (err, results) => {
       if (err) {
         res.status(500).send('Internal Server Error')
       } else {
-        res.status(201).send('added movie' + req.body.name);
+        res.status(201).send('added movie' + req.body.title);
       }
-
+    })
+  }, // put request toggle watched // passes a js object
+  toggleWatchedInt: function (req, res) {
+    //call the model and pass it the req object and a callback
+    console.log('toggleWatched controller', req.body);
+    models.toggle(req.body, (err, result) => {
+      if (err) {
+        res.status(500).send('Internal server error patch');
+      } else {
+        res.status(200).send('watched value updated in DataBase');
+      }
     })
   }
-  // You can add more controller functions for inserting and updating movies
 };
 //use the models method and pass in a callback to them

@@ -13,8 +13,9 @@ app.use(express.static('client/dist'));
 //get request to enpoint /movies runs getAllMovies function
 app.get('/movies', moviesController.getAllMovies);
 //post request
-app.post('/movies', moviesController.postAMovie)
+app.post('/movies', moviesController.postAMovie);
 //update the watched integer with a put or patch
+app.patch('/movies', moviesController.toggleWatchedInt);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);

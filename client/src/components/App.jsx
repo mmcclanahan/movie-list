@@ -4,14 +4,29 @@ import SearchBar from './SearchBar.jsx';
 import AddMovie from './AddMovie.jsx';
 import WatchedButton from './WatchedButton.jsx'
 import ToWatchButton from './ToWatchButton.jsx'
+import axios from 'axios';
 
 const App = () => {
   //movies to be shown
   const [movieList, setMovieList] = React.useState([]);
+
+
   //holds all movies added
   const [allMovies, setAllMovies] = React.useState([]);
   //state of which movies are shown watched or to watch
-  const [watchedMovies, setWatchedMovies] = React.useState(false);
+  const [watchedMovies, setWatchedMovies] = React.useState(0);
+
+  React.useEffect(() => {
+    //axios.get('/movies').then(response => {setMovieList(response.data)}).catch(error => console.error('axiosget', error))
+    axios.get('/movies')
+      .then(function(response) {
+        console.log(response.data);
+        setAllMovies(response.data);
+      })
+      .catch(function(error) {
+        console.log(error,'axios');
+      })
+  }, []);
 
   const handleSearch = () => {
     let searchValue = document.getElementsByClassName('searchMovieInput')[0].value;
@@ -35,13 +50,17 @@ const App = () => {
     setMovieList(movies);
     document.getElementsByClassName('searchMovieInput')[0].value = '';
   }
-//checked
+//adds movies with a post
   const addMovie = () => {
     let userInput = document.getElementsByClassName('addMovieInput')[0].value;
-    let newMovieName = {'title': userInput, 'watched': false};
-    let movies = allMovies.slice().concat(newMovieName);
-    setAllMovies(movies);
-    setMovieList(movies);
+    axios.post('/movies', { 'title': `${userInput}` })
+      .then(function(response) {
+        console.log('movie added',response)
+        axios.get('/movies').then(function(response) {setAllMovies(response.data)})
+      });
+    //let movies = allMovies.slice().concat(newMovieName);
+    //setAllMovies(movies);
+    //setMovieList(movies);
     document.getElementsByClassName('addMovieInput')[0].value = '';
   };
 //checked
@@ -53,10 +72,10 @@ const App = () => {
 //checked  undooooo
   const toggleWatched = (videoObject) => {
     allMovies.indexOf(videoObject)
-    if (videoObject.watched === true) {
-      videoObject.watched = false;
+    if (videoObject.watched === 1) {
+      videoObject.watched = 0;
     } else {
-      videoObject.watched = true;
+      videoObject.watched = 1;
     }
   };
 //d
@@ -68,14 +87,14 @@ const App = () => {
         <AddMovie addMovieOnEnterPress={addMovieOnEnterPress} addMovie={addMovie}/>
       <div className='buttonsAndSearch'>
         <div className='watchedButtons'>
-            <WatchedButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(true)}/>
-            <ToWatchButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(false)}/>
+            <WatchedButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(1)}/>
+            <ToWatchButton watchedMovies={watchedMovies} setWatchedMovies={() => setWatchedMovies(0)}/>
         </div>
         <div>
           <SearchBar handleSearch={handleSearch} showAllMovies={showAllMovies}/>
         </div>
       </div>
-        <MovieListView videos={movieList} watchedMovies={watchedMovies} toggleWatched={toggleWatched}/>
+        <MovieListView videos={allMovies} watchedMovies={watchedMovies} toggleWatched={toggleWatched}/>
     </div>
   );
 }
