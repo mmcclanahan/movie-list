@@ -31,7 +31,7 @@ const App = () => {
   const handleSearch = () => {
     let searchValue = document.getElementsByClassName('searchMovieInput')[0].value;
     if (searchValue === '') {
-      setMovieList(allMovies);
+      setAllMovies(allMovies);
     } else {
       let arrayOfMovies = allMovies.filter((movie) => {
         return (movie.title.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1)
@@ -39,15 +39,14 @@ const App = () => {
       if(arrayOfMovies.length === 0) {
         alert('No Movies contain that name! Please try again with a different search.')
       } else {
-        setMovieList(arrayOfMovies);
+        setAllMovies(arrayOfMovies);
       }
 
     }
   };
 //checked
   const showAllMovies = () => {
-    let movies = allMovies;
-    setMovieList(movies);
+    axios.get('/movies').then(function(response) {setAllMovies(response.data)})
     document.getElementsByClassName('searchMovieInput')[0].value = '';
   }
 //adds movies with a post
@@ -71,12 +70,16 @@ const App = () => {
   }
 //checked  undooooo
   const toggleWatched = (videoObject) => {
-    allMovies.indexOf(videoObject)
+    console.log(videoObject);
     if (videoObject.watched === 1) {
       videoObject.watched = 0;
     } else {
       videoObject.watched = 1;
     }
+    axios.patch('/movies', videoObject)
+    .then(function(response) {
+      axios.get('/movies').then(function(response) {setAllMovies(response.data)})
+    })
   };
 //d
   return (
