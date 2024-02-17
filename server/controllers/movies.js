@@ -37,6 +37,17 @@ module.exports = {
         res.status(200).send('watched value updated in DataBase');
       }
     })
+  },
+  deleteAMovie: function(req, res) {
+    console.log('deleteAMovie controller', req.body);
+    models.deleteData(req.body, (err, results) => {
+      if (err) {
+        console.log(err, 'controll err')
+        res.status(500).send('server error delete')
+      } else {
+        res.status(200).send('successfully deleted movie')
+      }
+    })
   }
 };
 //use the models method and pass in a callback to them

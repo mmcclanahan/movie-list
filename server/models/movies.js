@@ -2,16 +2,7 @@
 const db = require('../db');
 
 module.exports = {
-  /*get all movies is called and passed the callback:
-  (err, movies) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('error');
-      } else {
-        res.json(movies);
-      }
-    }
-  */
+  //get all movies is called and passed the callback:
   getAll: function(callback) {
     db.query('SELECT * FROM movies', (err, results) => {
       console.log('model');
@@ -41,6 +32,17 @@ module.exports = {
         callback(err);
       } else {
         console.log(results,'querys results variable');
+        callback(null, results)
+      }
+    })
+  },
+  deleteData: function(data, callback) {
+    console.log('delete model', data);
+    db.query(`DELETE FROM movies WHERE id = ${data.id}`, (err, results) => {
+      if (err) {
+        console.log(err, 'model err')
+        callback(err);
+      } else {
         callback(null, results)
       }
     })

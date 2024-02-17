@@ -16,6 +16,8 @@ app.get('/movies', moviesController.getAllMovies);
 app.post('/movies', moviesController.postAMovie);
 //update the watched integer with a put or patch
 app.patch('/movies', moviesController.toggleWatchedInt);
+//delete movie
+app.delete('/movies', moviesController.deleteAMovie);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);

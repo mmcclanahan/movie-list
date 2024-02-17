@@ -68,7 +68,7 @@ const App = () => {
       addMovie();
     }
   }
-//checked  undooooo
+//patches the video object
   const toggleWatched = (videoObject) => {
     console.log(videoObject);
     if (videoObject.watched === 1) {
@@ -81,7 +81,16 @@ const App = () => {
       axios.get('/movies').then(function(response) {setAllMovies(response.data)})
     })
   };
-//d
+//delete request for movie id
+  const deleteMovie = (videoObject) => {
+    console.log(videoObject);
+    axios.delete('/movies', {data:videoObject})
+    .then(function(response) {
+      axios.get('/movies')
+      .then(function(response) {setAllMovies(response.data)})
+    })
+  };
+
   return (
     <div className='allElements'>
       <div className='header'>
@@ -97,7 +106,7 @@ const App = () => {
           <SearchBar handleSearch={handleSearch} showAllMovies={showAllMovies}/>
         </div>
       </div>
-        <MovieListView videos={allMovies} watchedMovies={watchedMovies} toggleWatched={toggleWatched}/>
+        <MovieListView videos={allMovies} deleteMovie={deleteMovie} watchedMovies={watchedMovies} toggleWatched={toggleWatched}/>
     </div>
   );
 }
